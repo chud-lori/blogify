@@ -40,7 +40,7 @@ export default function LandingPage() {
           </div>
           <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-xs sm:max-w-2xl mx-auto mt-4 animate-fade-in-slow break-words">
             The fastest way to launch scalable, production-ready Go web APIs and microservices.<br />
-            <span className="text-blue-600 dark:text-blue-400 font-bold">Clean Architecture</span>, <span className="text-purple-600 dark:text-purple-400 font-bold">REST & gRPC</span>, <span className="text-pink-600 dark:text-pink-400 font-bold">Dockerized</span>, and <span className="text-yellow-500 font-bold">Observability</span> built-in.<br />
+            <span className="text-blue-600 dark:text-blue-400 font-bold">Clean Architecture</span>, <span className="text-purple-600 dark:text-purple-400 font-bold">REST & gRPC</span>, <span className="text-pink-600 dark:text-pink-400 font-bold">Circuit Breaker</span>, <span className="text-yellow-500 font-bold">Dockerized</span>, and <span className="text-green-500 font-bold">Observability</span> built-in.<br />
             <span className="inline-block mt-2 text-xs sm:text-base text-gray-500 dark:text-gray-400">Ship your SaaS backend in minutes, not months.</span>
           </p>
         </div>
@@ -62,16 +62,21 @@ export default function LandingPage() {
           <p className="text-gray-600 dark:text-gray-300">User CRUD, DTOs, controllers, and routing. Example gRPC service with protobuf and testable client/server.</p>
         </div>
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5 sm:p-10 flex flex-col items-center text-center hover:scale-105 transition-transform animate-feature-fade-in-delay2">
-          <svg className="w-14 h-14 mb-4 text-pink-500 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /></svg>
-          <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Dockerized & Cloud Ready</h3>
-          <p className="text-gray-600 dark:text-gray-300">Dockerfile, docker-compose, and cloud-native patterns for local development and production deployment.</p>
+          <svg className="w-14 h-14 mb-4 text-pink-500 animate-bounce" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Circuit Breaker</h3>
+          <p className="text-gray-600 dark:text-gray-300">Built-in circuit breaker pattern for fault tolerance and resilience. Prevents cascading failures and improves system reliability.</p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5 sm:p-10 flex flex-col items-center text-center hover:scale-105 transition-transform animate-feature-fade-in-delay3 md:col-span-1">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5 sm:p-10 flex flex-col items-center text-center hover:scale-105 transition-transform animate-feature-fade-in-delay3">
           <svg className="w-14 h-14 mb-4 text-yellow-500 animate-pulse" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M3 12h18M12 3v18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Observability & Logging</h3>
           <p className="text-gray-600 dark:text-gray-300">Loki, Promtail, Grafana, and structured logging with Logrus. Built-in support for log aggregation and visualization.</p>
         </div>
-        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5 sm:p-10 flex flex-col items-center text-center hover:scale-105 transition-transform animate-feature-fade-in-delay4 md:col-span-2">
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5 sm:p-10 flex flex-col items-center text-center hover:scale-105 transition-transform animate-feature-fade-in-delay4">
+          <svg className="w-14 h-14 mb-4 text-indigo-500 animate-spin-slow" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /></svg>
+          <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Dockerized & Cloud Ready</h3>
+          <p className="text-gray-600 dark:text-gray-300">Dockerfile, docker-compose, and cloud-native patterns for local development and production deployment.</p>
+        </div>
+        <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-5 sm:p-10 flex flex-col items-center text-center hover:scale-105 transition-transform animate-feature-fade-in-delay5 md:col-span-1">
           <svg className="w-14 h-14 mb-4 text-green-500 animate-spin-slow" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" /><path d="M8 12l2 2 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
           <h3 className="text-xl font-bold mb-2 text-gray-900 dark:text-white">Production Ready</h3>
           <p className="text-gray-600 dark:text-gray-300">PostgreSQL, Redis, migrations, error handling, API key auth, and more. Everything you need to launch your SaaS backend.</p>
@@ -152,11 +157,13 @@ export default function LandingPage() {
         @keyframes feature-fade-in-delay2 { from { opacity: 0; transform: scale(0.95);} 70% { opacity: 0.5; } to { opacity: 1; transform: none; } }
         @keyframes feature-fade-in-delay3 { from { opacity: 0; transform: scale(0.95);} 80% { opacity: 0.5; } to { opacity: 1; transform: none; } }
         @keyframes feature-fade-in-delay4 { from { opacity: 0; transform: scale(0.95);} 90% { opacity: 0.5; } to { opacity: 1; transform: none; } }
+        @keyframes feature-fade-in-delay5 { from { opacity: 0; transform: scale(0.95);} 95% { opacity: 0.5; } to { opacity: 1; transform: none; } }
         @keyframes how-fade-in { from { opacity: 0; transform: translateY(60px);} to { opacity: 1; transform: none; } }
         @keyframes step-slide-in { from { opacity: 0; transform: translateX(-40px);} to { opacity: 1; transform: none; } }
         @keyframes step-slide-in-delay { from { opacity: 0; transform: translateX(-40px);} 60% { opacity: 0.5; } to { opacity: 1; transform: none; } }
         @keyframes step-slide-in-delay2 { from { opacity: 0; transform: translateX(-40px);} 80% { opacity: 0.5; } to { opacity: 1; transform: none; } }
         @keyframes cta-fade-in { from { opacity: 0; transform: scale(0.95);} to { opacity: 1; transform: none; } }
+        @keyframes pulse { 0%, 100% { filter: drop-shadow(0 0 0 #a21caf88); } 50% { filter: drop-shadow(0 0 32px #a21caf88); } }
         .animate-fade-in { animation: fade-in 1s ease; }
         .animate-fade-in-slow { animation: fade-in-slow 1.2s cubic-bezier(.4,0,.2,1); }
         .animate-slide-in { animation: slide-in 1s cubic-bezier(.4,0,.2,1); }
@@ -170,6 +177,7 @@ export default function LandingPage() {
         .animate-feature-fade-in-delay2 { animation: feature-fade-in-delay2 2.2s cubic-bezier(.4,0,.2,1); }
         .animate-feature-fade-in-delay3 { animation: feature-fade-in-delay3 2.7s cubic-bezier(.4,0,.2,1); }
         .animate-feature-fade-in-delay4 { animation: feature-fade-in-delay4 3.2s cubic-bezier(.4,0,.2,1); }
+        .animate-feature-fade-in-delay5 { animation: feature-fade-in-delay5 3.7s cubic-bezier(.4,0,.2,1); }
         .animate-how-fade-in { animation: how-fade-in 1.3s cubic-bezier(.4,0,.2,1); }
         .animate-step-slide-in { animation: step-slide-in 1.2s cubic-bezier(.4,0,.2,1); }
         .animate-step-slide-in-delay { animation: step-slide-in-delay 1.7s cubic-bezier(.4,0,.2,1); }

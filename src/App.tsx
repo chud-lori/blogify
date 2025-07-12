@@ -70,7 +70,7 @@ function App() {
   const { token, setToken } = useAuth();
   const [dark, setDark] = useState(() => {
     if (typeof window !== 'undefined') {
-      return localStorage.getItem('theme') === 'dark' || (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+      return localStorage.getItem('theme') === 'dark';
     }
     return false;
   });
@@ -141,7 +141,7 @@ function App() {
           <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 px-0 sm:px-4">
             <div className="flex flex-col items-center md:items-start gap-1">
               <span className="font-semibold tracking-wide">&copy; {new Date().getFullYear()} Blogify. All rights reserved.</span>
-              <span className="text-sm">Crafted with <span className="text-blue-200">♥</span> by Blogify Team</span>
+              <span className="text-sm">Crafted with <span className="text-blue-200">♥</span> by Lori</span>
             </div>
             <div className="flex flex-col items-center gap-1">
               <a href="https://github.com/chud-lori/go-boilerplate" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:underline text-white/90 hover:text-blue-200 transition">
