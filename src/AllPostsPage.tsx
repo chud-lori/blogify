@@ -6,8 +6,9 @@ interface Post {
   id: string;
   title: string;
   body: string;
-  user?: { email: string };
+  author?: { id: string; email: string; created_at: string };
   created_at: string;
+  updated_at?: string;
 }
 
 export default function AllPostsPage() {
@@ -16,22 +17,26 @@ export default function AllPostsPage() {
   const [error, setError] = useState('');
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState<number | null>(null); // total posts, if available
+  const [pagination, setPagination] = useState<{
+    current_page: number;
+    page_size: number;
+    total_items: number;
+    total_pages: number;
+    has_next: boolean;
+    has_prev: boolean;
+  } | null>(null);
   const limit = 10;
 
   useEffect(() => {
     setLoading(true);
     api.get('/post', { params: { search, page, limit } })
       .then(res => {
-        const data = res.data?.data;
-        setPosts(Array.isArray(data) ? data : []);
-        if (typeof res.data?.total === 'number') setTotal(res.data.total);
+        setPosts(Array.isArray(res.data?.data) ? res.data.data : []);
+        setPagination(res.data?.pagination || null);
       })
       .catch(() => setError('Failed to load posts'))
       .finally(() => setLoading(false));
   }, [search, page]);
-
-  const totalPages = total ? Math.ceil(total / limit) : null;
 
   return (
     <div className="max-w-2xl w-full mx-auto mt-8 sm:mt-16 bg-[#dbeafe] dark:bg-gray-800 rounded-2xl shadow-xl p-6 sm:p-10 border border-blue-200 dark:border-gray-700">
@@ -55,33 +60,30 @@ export default function AllPostsPage() {
             </h3>
             <p className="mb-2 text-gray-700 dark:text-gray-200 line-clamp-2">{post.body}</p>
             <div className="text-xs text-gray-400">
-              By: {post.user?.email || 'Unknown'} | {new Date(post.created_at).toLocaleString()}
+              By: {post.author?.email || 'Unknown'} | {new Date(post.created_at).toLocaleString()}
             </div>
           </li>
         ))}
       </ul>
-      <div className="flex justify-center items-center gap-2 mt-8">
-        <button
-          className="px-3 py-1 rounded bg-[#2563eb] text-white font-semibold disabled:opacity-50"
-          onClick={() => setPage(p => Math.max(1, p - 1))}
-          disabled={page === 1 || loading}
-        >
-          Prev
-        </button>
-        {totalPages && (
-          <span className="text-gray-700 dark:text-gray-200 text-sm">Page {page} of {totalPages}</span>
-        )}
-        {!totalPages && (
-          <span className="text-gray-700 dark:text-gray-200 text-sm">Page {page}</span>
-        )}
-        <button
-          className="px-3 py-1 rounded bg-[#2563eb] text-white font-semibold disabled:opacity-50"
-          onClick={() => setPage(p => (totalPages ? Math.min(totalPages, p + 1) : p + 1))}
-          disabled={loading || (totalPages ? page >= totalPages : posts.length < limit)}
-        >
-          Next
-        </button>
-      </div>
+      {pagination && (
+        <div className="flex justify-center items-center gap-2 mt-8">
+          <button
+            className="px-3 py-1 rounded bg-[#2563eb] text-white font-semibold disabled:opacity-50"
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+            disabled={!pagination.has_prev || loading}
+          >
+            Prev
+          </button>
+          <span className="text-gray-700 dark:text-gray-200 text-sm">Page {pagination.current_page} of {pagination.total_pages}</span>
+          <button
+            className="px-3 py-1 rounded bg-[#2563eb] text-white font-semibold disabled:opacity-50"
+            onClick={() => setPage(p => p + 1)}
+            disabled={!pagination.has_next || loading}
+          >
+            Next
+          </button>
+        </div>
+      )}
     </div>
   );
 } 
